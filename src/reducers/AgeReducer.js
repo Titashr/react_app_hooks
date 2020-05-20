@@ -1,14 +1,10 @@
 import { actionTypes } from '../actions/ActionTypes';
 
-const initialState = {
-    age: 0,
-    error: null
-};
-
-const ageReducer = (state = initialState, action) => {
+const ageReducer = (state, action) => {
     let newState;
     let newValue;
     const { type, payload } = action;
+    debugger;
     switch (type) {
         case actionTypes.increase_age:
             newValue = parseInt(payload, 10 ) + 1;

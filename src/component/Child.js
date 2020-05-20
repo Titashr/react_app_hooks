@@ -1,15 +1,23 @@
 // Link.react.js
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import '../styles/Button.scss';
 import PropTypes from 'prop-types';
 import { ageContext } from './../context/AgeContext';
+import { userContext } from './../context/UserContext';
 
 const Child = () => {
 
     const [error, setError] = useState(null);
     const myRef = useRef();
-    const context = useContext(ageContext);
-    const [age, setAge] = useState(context.age);
+    const agecontext = useContext(ageContext);
+    const usercontext = useContext(userContext);
+    const [age, setAge] = useState(agecontext.age);
+    console.log(agecontext);
+    console.log(usercontext);
+
+    useEffect(() => {
+        console.log('Inside use effect', age);
+    }, [age]);
     
     const _decreaseAge = () => {
         if (age > 0) {

@@ -1,47 +1,31 @@
-import React from "react";
+import React, { useState, useRef, useReducer } from "react";
+import ageReducer from "../reducers/AgeReducer";
 
 export const ageContext = React.createContext();
 
-export default class AgeContextProvider extends React.Component {
+const state = {
+    age: 0,
+    error: null
+};
 
-    state = {
-        age: 0,
-        error: null
-    };
+const AgeContextProvider = (props) => {
+    const myRef = useRef();
+    const [initialState, dispatch] = useReducer(ageReducer, state);
+    const [inputAge, setInputAge] = useState();
 
-    myRef = React.createRef();
-
-    decrement = () => {
-        if (this.state.age > 0) {
-            this.setState({ age: this.state.age - 1 });
-        }
-        else {
-            this.setState({
-                error: "Age can't be smaller than 0"
-            })
-        }
-    }
-
-    increment = () => {
-        this.setState({
-            age: parseInt(this.state.age, 10) + 1,
-            error: null
-        });
-    }
-
-    inputAge = (event) => {
+    const ageFromInput = (event) => {
         if (event.key === 'Enter') {
-            this.setState({ age: event.target.value });
-            this.myRef.current.blur();
+            setInputAge(event.target.value);
+            myRef.current.blur();
         }
     }
+    const newAge = inputAge ? inputAge : initialState.age;
 
-    render() {
-        return (
-            <ageContext.Provider value={{ ...this.state, _increaseAge: this.increment, _decreaseAge: this.decrement, _enteredAge: this.inputAge, _ref: this.myRef }}>
-                {this.props.children}
-            </ageContext.Provider>
-        );
-    }
-
+    return (
+        <ageContext.Provider value={{ age: newAge, error:initialState.error, dispatch, _enteredAge: ageFromInput, _ref: myRef }}>
+            {props.children}
+        </ageContext.Provider>
+    );
 }
+
+export default AgeContextProvider;
