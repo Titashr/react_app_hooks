@@ -5,5 +5,6 @@ export const actionTypes = {
 };
 
 export const userActionTypes = {
+    getUserDetails: "GET_USER_DETAILS",
     getUser: "GET_USER"
 }

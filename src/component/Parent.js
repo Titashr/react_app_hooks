@@ -1,18 +1,16 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Child from './Child';
 import SecondChild from './SecondChild';
-import { ageContext } from './../context/AgeContext';
 
-export default class Parent extends React.Component {
-    
-    static contextType = ageContext;
-    render() {
-        // console.log(this.context);
-        return (
+const Parent = (props) => {
+    return (
+        <Fragment>
+            {console.log(props.age)};
             <div className='text-center'>
-                <Child/>
-                <SecondChild/>
+                <Child />
+                <SecondChild />
             </div>
-        );
-    }
+        </Fragment>
+    );
 }
+export default Parent;

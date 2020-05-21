@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom';
 import './styles/index.css';
 import App from './component/App';
 import * as serviceWorker from './serviceWorker';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import Reducer from './reducers/index';
-import thunk from "redux-thunk";
-
-// const store = createStore(Reducer, applyMiddleware(thunk));
+import UserContextProvider from './context/UserContext';
+import AgeContextProvider from './context/AgeContext';
 
 ReactDOM.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
+  <React.StrictMode>
+    <AgeContextProvider>
+      <UserContextProvider>
+        <App />
+      </UserContextProvider>
+    </AgeContextProvider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

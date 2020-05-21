@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useReducer } from "react";
+import userReducer from './../reducers/UserReducer';
+import {applyMiddleware} from '../reducers/ApplyMiddleware';
+
 
 export const userContext = React.createContext();
 
@@ -18,13 +21,11 @@ const UserContextProvider = (props) => {
         }
     };
 
-    const getUser = () => {
-        return (
-            <div>{state}</div>);
-    }
+    const [initialState, dispatch] = useReducer(userReducer, state);
+    const dispatchWithMiddleware = applyMiddleware(dispatch);
 
     return (
-        <userContext.Provider value={{ person:state.person, getPerson: getUser }}>
+        <userContext.Provider value={{ person:initialState.person, dispatchWithMiddleware }}>
             {props.children}
         </userContext.Provider>
     );

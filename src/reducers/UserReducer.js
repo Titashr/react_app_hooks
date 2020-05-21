@@ -1,14 +1,10 @@
 import { userActionTypes } from '../actions/ActionTypes';
 
-const initialState = {
-    person: null
-};
-
-const userReducer = (state = initialState, action) => {
+const userReducer = (state, action) => {
     let newState;
     const { type, payload } = action;
     switch (type) {
-        case userActionTypes.getUser:
+        case userActionTypes.getUserDetails:
             newState = { ...state, person: payload};
             break;
         default:

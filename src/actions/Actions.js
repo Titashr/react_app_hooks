@@ -1,5 +1,4 @@
 import { actionTypes, userActionTypes } from './ActionTypes';
-import axios from 'axios';
 
 export function increment_age(val) {
     return {
@@ -21,17 +20,13 @@ export function invalid() {
 
 export function get_user_details(val) {
     return {
-        type: userActionTypes.getUser,
+        type: userActionTypes.getUserDetails,
         payload: val
     };
 };
 
-export function get_user() {
-    return (dispatch) => {
-        return axios.get(`https://randomuser.me/api/`)
-            .then(res => {
-                const person = res.data.results[0];
-                setTimeout(() => { dispatch(get_user_details(person)) }, 3000);
-            });
-    }
+export const userDetails = () => {
+    return {
+        type: userActionTypes.getUser
+    };
 };

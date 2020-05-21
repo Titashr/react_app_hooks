@@ -13,7 +13,7 @@ const SecondChild = () => {
             <ageContext.Consumer>{(agecontext) => {
                 return (
                     <div>
-                        {console.log(usercontext)};
+                        {/* {console.log(usercontext)}; */}
                         <h1>With context-API</h1>
                         <h3 data-testid="error">
                             {agecontext.error}
@@ -29,14 +29,14 @@ const SecondChild = () => {
                         </div>
                         <button
                             data-testid="button1"
-                            className='button-hover'
+                            className='btn btn-dark'
                             onClick={() => agecontext.dispatch(actions.increment_age(agecontext.age))}
                         >
                             Increment
                 </button>
                         <button
                             data-testid="button2"
-                            className='button-hover'
+                            className='btn btn-dark'
                             onClick={agecontext.age > 0 ?
                                 () => agecontext.dispatch(actions.decrement_age(agecontext.age)) :
                                 () => agecontext.dispatch(actions.invalid())}
