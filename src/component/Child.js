@@ -3,6 +3,7 @@ import React, { useState, useRef, useContext } from 'react';
 import '../styles/Button.scss';
 import PropTypes from 'prop-types';
 import { ageContext } from './../context/AgeContext';
+import withAddedFunctionality from '../HOC/WithAddedFunc';
 
 const Child = () => {
 
@@ -10,7 +11,7 @@ const Child = () => {
     const myRef = useRef();
     const agecontext = useContext(ageContext);
     const [age, setAge] = useState(agecontext.age);
-    
+
     const _decreaseAge = () => {
         if (age > 0) {
             setAge(age - 1);
@@ -48,7 +49,7 @@ const Child = () => {
             </div>
             <div>
                 <span data-testid="counter" className='text-area'>
-                    { age }
+                    {age}
                 </span>
             </div>
             <button
@@ -72,5 +73,5 @@ const Child = () => {
 Child.propTypes = {
     age: PropTypes.number
 };
-
-export default Child;
+const UpdatedChildComponent = withAddedFunctionality(Child)
+export default UpdatedChildComponent;
